@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
-import Web3Context from "../../context/Web3Context";
+import Web3Context from "../../Context/Web3Context";
 
 const TokenWhitelist = () => {
   const { wallet, setWallet } = useContext(Web3Context);

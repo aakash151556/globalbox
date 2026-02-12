@@ -5,7 +5,7 @@ import { connectWallet } from "./../../utils/connectWallet";
 import { useContext } from "react";
 
 import { getToken, setToken } from "../../utils/JwtToken";
-import Web3Context from "../../context/Web3Context";
+import Web3Context from "../../Context/Web3Context";
 
 const Register = () => {
   const [searchParams] = useSearchParams();
