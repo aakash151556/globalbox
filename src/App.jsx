@@ -33,7 +33,7 @@ import AdminTeamBussiness from "./admin/pages/AdminTeamBussiness";
 import { connectWallet } from "./utils/connectWallet";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import AdminProtectedRoute from "./utils/AdminProtectedRoute";
-import Web3Context from "./context/Web3Context";
+import Web3Context from "./Context/Web3Context";
 
 export default function App() {
  
