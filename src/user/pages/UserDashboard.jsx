@@ -4,7 +4,7 @@ import { getWalletFromJwt, isJwtValid } from "./../../utils/jwt";
 import Swal from "sweetalert2";
 import api from "../../api/axios";
 import Logo from "./../../../public/mdl25.png";
-import Web3Context from "../../context/Web3Context";
+import Web3Context from "../../Context/Web3Context";
 import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {

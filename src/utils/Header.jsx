@@ -9,7 +9,7 @@ import { connectWallet } from "../utils/connectWallet";
 import { isJwtValid, getWalletFromJwt } from "../utils/jwt";
 import { getToken, setToken, clearToken } from "./JwtToken";
 
-import Web3Context from "../context/Web3Context";
+import Web3Context from "../Context/Web3Context";
 
 const Header = () => {
   const navigate = useNavigate();
