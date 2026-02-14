@@ -147,7 +147,7 @@ const Header = () => {
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/plan" onClick={closeMenu}>
+              <Link className="nav-link" to="/bussiness-plan" onClick={closeMenu}>
                 Business Plan
               </Link>
             </li>

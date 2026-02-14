@@ -5,6 +5,9 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap";
 import "../public/css/style.css";
 import Home from "./home/pages/Index";
+import AboutUs from "./home/pages/AboutUs";
+import ContactUs from "./home/pages/ContactUs";
+import BussinessPlan from "./home/pages/BussinessPlan";
 
 import Register from "./home/pages/Register";
 import AdminLogin from "./home/pages/AdminLogin";
@@ -44,6 +47,9 @@ export default function App() {
       element: <HomeLayout />,
       children: [
         { index: true, element: <Home /> },
+        { path: "about", element: <AboutUs /> },
+        { path: "contact", element: <ContactUs /> },
+        { path: "bussiness-plan", element: <BussinessPlan /> },
         { path: "register", element: <Register /> },
         { path: "admin-login", element: <AdminLogin /> },
         { path: "token-white-list", element: <TokenWhitelist /> },

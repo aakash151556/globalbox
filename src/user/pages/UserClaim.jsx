@@ -12,6 +12,8 @@ const UserClaim = () => {
 
   const [loading, setLoading] = useState(false);
   const [amount, setAmount] = useState("");
+  const [adminCharge, setAdminCharge] = useState("");
+  const [netAmount, setNetAmount] = useState("");
   const [balance, setBalance] = useState("0");
 
   /* ---------------------------------- */
@@ -43,6 +45,9 @@ const UserClaim = () => {
     const v = e.target.value;
     if (v === "" || /^[0-9]+(\.[0-9]+)?$/.test(v)) {
       setAmount(v);
+      const ac = v * 10 * 0.01;
+      setAdminCharge(ac);
+      setNetAmount(v - ac);
     }
   };
 
@@ -53,7 +58,7 @@ const UserClaim = () => {
     try {
       if (!wallet) return;
 
-      const usdAmount = Number(amount);
+      const usdAmount = Number(netAmount);
       if (usdAmount >= 10) {
         Swal.fire("Invalid amount", "less than or equal to 10$", "warning");
         return;
@@ -75,23 +80,23 @@ const UserClaim = () => {
       const nonce = await business.nonces(wallet.selectedAccount);
 
       /* ---------------- EXPIRY ---------------- */
-    //  const expiry = Math.floor(Date.now() / 1000) + 300; // 5 minutes
-const expiry = BigInt(Math.floor(Date.now() / 1000) + 300);
+      //  const expiry = Math.floor(Date.now() / 1000) + 300; // 5 minutes
+      const expiry = BigInt(Math.floor(Date.now() / 1000) + 300);
       /* ---------------- AMOUNTS ---------------- */
       const usdtDecimals = await usdt.decimals();
 
       const usdtWei = ethers.parseUnits(usdAmount.toString(), usdtDecimals);
-//    console.log(
-//   JSON.stringify({
-//     to: wallet.selectedAccount,
-//     symbol: usdtSymbol,
-//     maxAmount: usdtWei.toString(),
-//     nonce: nonce.toString(),
-//     expiry: expiry.toString(),
-//     chainId: wallet.chainId,
-//     businessLogicAddress: business.target,
-//   })
-// );
+      //    console.log(
+      //   JSON.stringify({
+      //     to: wallet.selectedAccount,
+      //     symbol: usdtSymbol,
+      //     maxAmount: usdtWei.toString(),
+      //     nonce: nonce.toString(),
+      //     expiry: expiry.toString(),
+      //     chainId: wallet.chainId,
+      //     businessLogicAddress: business.target,
+      //   })
+      // );
 
       // const signature = await signClaim({
       //   signer: wallet.signer,
@@ -121,47 +126,56 @@ const expiry = BigInt(Math.floor(Date.now() / 1000) + 300);
       // const verify_signature=await business.getSignedMessage(usdtSymbol,wallet.selectedAccount,usdtWei,expiry,signature)
       // console.log(verify_signature)
 
-          /* ---------------- BACKEND ---------------- */
-          const res = await api.post("/DynamicAPI/dynamic-request", {
-            obj: {
-              userid: wallet.selectedAccount,
-              amount: amount,
-            },
-            apiname: "InsertWithdrawlRequest",
-          });
+      /* ---------------- BACKEND ---------------- */
+      const res = await api.post("/DynamicAPI/dynamic-request", {
+        obj: {
+          userid: wallet.selectedAccount,
+          amount: amount,
+          adminCharge,
+          netAmount
+        },
+        apiname: "InsertWithdrawlRequest",
+      });
       if (res?.data?.data?.[0]?.id === 1) {
-          /* ---------------- CLAIM TX ---------------- */
+        /* ---------------- CLAIM TX ---------------- */
 
-            const tx=await business.claim(usdtSymbol,wallet.selectedAccount,usdtWei,usdtWei,expiry,signature)
+        const tx = await business.claim(
+          usdtSymbol,
+          wallet.selectedAccount,
+          usdtWei,
+          usdtWei,
+          expiry,
+          signature,
+        );
 
-         //  const tx=await business.claim(usdtSymbol,wallet.selectedAccount,usdtWei)
+        //  const tx=await business.claim(usdtSymbol,wallet.selectedAccount,usdtWei)
 
-            const receipt = await tx.wait();
-            const approve_res = await api.post("/DynamicAPI/dynamic-request", {
-              obj: {
-                userid: wallet.selectedAccount,
-                TransactionId: res?.data?.data?.[0]?.TransactionId,
-                trnhash: receipt.hash,
-              },
-              apiname: "ApproveWithdrawlRequest",
-            });
-            if (approve_res?.data?.data?.[0]?.id === 1) {
-              Swal.fire({
-                title: "Claim Successful 🎉",
-                html: `
+        const receipt = await tx.wait();
+        const approve_res = await api.post("/DynamicAPI/dynamic-request", {
+          obj: {
+            userid: wallet.selectedAccount,
+            TransactionId: res?.data?.data?.[0]?.TransactionId,
+            trnhash: receipt.hash,
+          },
+          apiname: "ApproveWithdrawlRequest",
+        });
+        if (approve_res?.data?.data?.[0]?.id === 1) {
+          Swal.fire({
+            title: "Claim Successful 🎉",
+            html: `
                 <p>Claim completed successfully.</p>
                 <a href="https://bscscan.com/tx/${receipt.hash}" target="_blank">
                   View Transaction
                 </a>
               `,
-                icon: "success",
-              }).then(() => window.location.reload());
-            } else {
-              throw new Error(res.data.data[0].msg);
-            }
-          } else {
-            throw new Error(res.data.data[0].msg);
-          }
+            icon: "success",
+          }).then(() => window.location.reload());
+        } else {
+          throw new Error(res.data.data[0].msg);
+        }
+      } else {
+        throw new Error(res.data.data[0].msg);
+      }
     } catch (err) {
       console.error(err);
       await api.post("/DynamicAPI/dynamic-request", {
@@ -204,6 +218,20 @@ const expiry = BigInt(Math.floor(Date.now() / 1000) + 300);
           placeholder="Enter Amount"
           value={amount}
           onChange={handleChange}
+        />
+        <label>Admin Charge(10%)</label>
+        <input
+          className="form-control mb-2"
+          placeholder="Admin Charge"
+          value={adminCharge}
+          onChange={(e)=>setAdminCharge(e.target.value)}
+        />
+        <label>Net Amount</label>
+        <input
+          className="form-control mb-2"
+          placeholder="Net Amount"
+          value={netAmount}
+          onChange={(e)=>setNetAmount(e.target.value)}
         />
       </div>
 

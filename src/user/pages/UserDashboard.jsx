@@ -181,17 +181,17 @@ const UserDashboard = () => {
                     <th>Name</th>
                     <th>Global Team</th>
                     <th>My Topup</th>
-                    <th>Claim</th>
+                    <th>Box 2X Income</th>
                   </tr>
                 </thead>
                 <tbody>
                   {packageList &&
                     packageList.map((val, key) => 
                       <tr>
-                        <th>{val.PlanName}</th>
-                        <td>{val.Amount}</td>
+                        <th>{val.PlanName}</th>                       
                         <td>{val.Team}</td>
                         <td>{val.MyTopup}</td>
+                        <td>{val.BoxIncome}</td>
                       </tr>
                     )}
                 </tbody>

@@ -20,7 +20,7 @@ const Footer = () => {
                   ></svg>
                 </a>
                 <span className="mb-3 mb-md-0 text-body-secondary white">
-                  © 2025-26 Global Box
+                 Global Box — Secure. Simple. Borderless Crypto Payments.
                 </span>
               </div>
             </footer>
