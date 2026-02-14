@@ -13,9 +13,9 @@ const AdminNavbar = () => {
           <Link className="nav-link text-uppercas" to="/admin/dashboard">
             Dashboard
           </Link>
-          <Link className="nav-link text-uppercas" to="/admin/staking-by-admin">
+          {/* <Link className="nav-link text-uppercas" to="/admin/staking-by-admin">
             Stake Topup
-          </Link>
+          </Link> */}
           <Link className="nav-link text-uppercas" to="/admin/user-list">
             Address List
           </Link>
@@ -25,9 +25,9 @@ const AdminNavbar = () => {
           >
             Team Bussiness List
           </Link>
-          <Link className="nav-link text-uppercas" to="/admin/change-price">
+          {/* <Link className="nav-link text-uppercas" to="/admin/change-price">
             Change Price
-          </Link>
+          </Link> */}
           {/* <Link className="nav-link text-uppercase" to="/admin/token-transfer-to-contract">
             Send Token To Contract
           </Link>

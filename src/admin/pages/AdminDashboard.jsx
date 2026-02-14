@@ -63,7 +63,7 @@ const AdminDashboard = () => {
           <div className="col-md-12">
             <div className="padings">
               <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-3" hidden>
                   <div className="card mt-1 mb-3 box-1 zoom-effect">
                     <div className="card-body">
                       <div className="d-flex more_flex">
@@ -112,7 +112,7 @@ const AdminDashboard = () => {
                   </div>
                 </div>
 
-                <div className="col-md-3">
+                <div className="col-md-3" hidden>
                   <div className="card mt-1 mb-3  box-4 zoom-effect">
                     <div className="card-body">
                       <div className="d-flex more_flex">
@@ -126,7 +126,7 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3" hidden>
                   <div className="card mt-1 mb-3  box-4 zoom-effect">
                     <div className="card-body">
                       <div className="d-flex more_flex">

@@ -95,12 +95,12 @@ const UserList = () => {
                     <th>Account Code</th>
                     <th>Referral Code</th>
                     <th>Topup In USDT</th>
-                    <th>Total Stake</th>
-                    <th>Release Coin</th>
-                    <th>Level Income</th>
+                    {/* <th>Total Stake</th>
+                    <th>Release Coin</th> */}
+                    <th>Total Income</th>
                     <th>Total Withdrawl</th>
                     <th>Pending Withdrawl</th>
-                    <th>Level Balance</th>
+                    <th>Total Balance</th>
                     <th>Date</th>
                   </tr>
                 </thead>
@@ -129,8 +129,8 @@ const UserList = () => {
                         <td>{event.UserId}<CopyText text={event.UserId} /></td>
                         <td>{event.SponsorId}<CopyText text={event.UserId} /></td>
                         <td>{event.TotalTopup}</td>
-                        <td>{event.TotalStake}</td>
-                        <td>{event.ROIIncome}</td>
+                        {/* <td>{event.TotalStake}</td>
+                        <td>{event.ROIIncome}</td> */}
                         <td>{event.LevelIncome}</td>
                         <td>{event.LevelWithdrawl}</td>
                         <td>{event.PendingWithdrawl}</td>
