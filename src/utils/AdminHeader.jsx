@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Collapse } from "bootstrap";
 
-import Logo from "./../../public/mdl25.png";
+import Logo from "./../../public/logo.png";
+
 import api from "../api/axios";
 
 import { connectWallet } from "../utils/connectWallet";
@@ -56,7 +57,9 @@ const AdminHeader = () => {
     closeMenu();
     navigate("/admin-login");
   };
-
+const openPdf = () => {
+  window.open("/plan.pdf", "_blank");
+};
 
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
@@ -95,7 +98,7 @@ const AdminHeader = () => {
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/plan" onClick={closeMenu}>
+              <Link className="nav-link" to="#" onClick={openPdf}>
                 Business Plan
               </Link>
             </li>

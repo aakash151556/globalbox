@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 
 import Swal from "sweetalert2";
 import api from "../../api/axios";
-import Logo from "./../../../public/mdl25.png";
+import Logo from "./../../../public/logo.png";
 
 
 const AdminDashboard = () => {

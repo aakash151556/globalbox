@@ -108,7 +108,9 @@ const Header = () => {
   const shortAddress = walletAddress
     ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
     : null;
-
+const openPdf = () => {
+  window.open("/plan.pdf", "_blank");
+};
   /* -------------------- JSX -------------------- */
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
@@ -147,9 +149,9 @@ const Header = () => {
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/bussiness-plan" onClick={closeMenu}>
-                Business Plan
-              </Link>
+             <Link className="nav-link" to="#" onClick={openPdf}>
+                            Business Plan
+                          </Link>
             </li>
           </ul>
 

@@ -3,7 +3,7 @@ import ReferralImg from "./../../../public/Referral.png";
 import { getWalletFromJwt, isJwtValid } from "./../../utils/jwt";
 import Swal from "sweetalert2";
 import api from "../../api/axios";
-import Logo from "./../../../public/mdl25.png";
+import Logo from "./../../../public/logo.png";
 import Web3Context from "../../Context/Web3Context";
 import { useNavigate } from "react-router-dom";
 
